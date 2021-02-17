@@ -1,0 +1,28 @@
+#/bin/bash
+
+echo "################################################################################################"
+pwd
+echo "################################################################################################"
+ls -hal
+echo "################################################################################################"
+
+cd /opt/app/cadastro-clientes-db/ \
+  && ./dwnmysql8driver \
+  && ls -l lib/ \
+  && cd dbcadclidev/ \
+  && export IP_HOST=cadastroclientes \
+  && export IP_DB=mysqldb \
+  && /opt/app/apache-ant-1.10.9/bin/ant -f build-mysql8.xml allindocker \
+  && cd /opt/app/ \
+  && java -XX:+UnlockExperimentalVMOptions \
+        -Xms128m -Xmx256m \
+        -XX:MaxMetaspaceSize=512m \
+        -XX:CompressedClassSpaceSize=64m \
+        -Xss16m \
+        -Xmn32m \
+        -XX:InitialCodeCacheSize=64m \
+        -XX:ReservedCodeCacheSize=64m \
+        -XX:MaxDirectMemorySize=128m \
+        -jar ./cadastro-clientes-endpoint.jar
+
+

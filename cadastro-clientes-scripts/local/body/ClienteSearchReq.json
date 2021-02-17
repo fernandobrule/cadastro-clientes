@@ -1,0 +1,5 @@
+{
+  "selectItems":["name","surname","email","address"],
+  "whereItems":[],
+  "orderByItems":[]
+}

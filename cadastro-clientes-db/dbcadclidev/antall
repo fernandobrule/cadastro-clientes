@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export IP_DB=localhost
+echo "      IP_DB : $IP_DB"
+
+#localhost
+export IP_HOST="localhost"
+#export IP_HOST="172.21.0.1"
+
+#$(ifconfig|grep inet|grep netmask|grep broadcast|awk '{print($2)}')
+echo "    IP_HOST : $IP_HOST"
+echo ""
+
+/opt/ant/ant/bin/ant -f build-mysql8.xml all

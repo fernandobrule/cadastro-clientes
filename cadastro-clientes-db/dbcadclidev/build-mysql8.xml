@@ -1,0 +1,164 @@
+
+<project name="Cadastro Clientes MySql DB Scripts" default="usage" basedir=".">
+   
+   <description>Cadastro Clientes db</description>
+   
+   <property environment="env" />
+   <property file="build-mysql8.properties"/>
+   
+   <target name="usage">
+      <echo>===============================</echo>
+      <echo>   Availables targets are:</echo>
+      <echo>-------------------------------</echo>
+      <echo>$ cdb  --> create database '${db.name}'</echo>
+      <echo>$ cusr --> create user</echo>
+      <echo>$ cct  --> cat create table</echo>
+      <echo>$ cpt  --> cat populate table</echo>
+      <echo>$ ct   --> create table</echo>
+      <echo>$ pt   --> populate table</echo>
+      <echo>$ all  --> all targets</echo>
+      <echo>===============================</echo>
+   </target>
+
+   <!-- 
+   - CREATE DB
+   -->
+   <target name="cdb">
+      <tstamp>
+         <format property="archive.name" 
+                 pattern="'logs/cadastro-clientes-create-db.log'" />
+      </tstamp>
+      <echo>- db.host: ${db.host}</echo>
+      <echo>- db.port: ${db.port}</echo>
+      <echo>- db.name: ${db.name}</echo>
+      <echo>- db.usr: ${db.usr}</echo>
+      <echo>- db.psw: ${db.psw}</echo>
+      <echo>- driver.location: ${driver.location}</echo>
+      <echo>- driver.class: ${driver.class}</echo>
+      <echo>- db.root.url: ${db.root.url}</echo>
+      <echo>- db.root.usr: ${db.root.usr}</echo>
+      <echo>- db.root.psw: ${db.root.psw}</echo>
+      <echo>- db.cadastro.clientes.url: ${db.cadastro.clientes.url}</echo>
+      <echo>- db.cadastro.clientes.usr: ${db.cadastro.clientes.usr}</echo>
+      <echo>- db.cadastro.clientes.psw: ${db.cadastro.clientes.psw}</echo>
+      <sql driver="${driver.class}" 
+           url="${db.root.url}" 
+           userid="${db.root.usr}" 
+           password="${db.root.psw}" 
+           src="init/init-db.sql" 
+           print="yes" 
+           output="${archive.name}">
+         <classpath>
+            <pathelement location="${driver.location}"/>
+         </classpath>
+      </sql>
+      <echo>-------------------------------------</echo>
+      <echo>SUCCESS: create db done</echo>
+      <echo>-------------------------------------</echo>
+   </target>
+   
+
+   <!-- 
+   - CREATE USER
+   -->
+   <target name="cusr">
+      <tstamp>
+         <format property="archive.name" 
+                 pattern="'logs/cadastro-clientes-create-usr.log'" />
+      </tstamp>
+      <sql driver="${driver.class}" 
+           url="${db.root.url}" 
+           userid="${db.root.usr}" 
+           password="${db.root.psw}" 
+           src="init/init-db-user.sql" 
+           print="yes" 
+           output="${archive.name}">
+         <classpath>
+            <pathelement location="${driver.location}"/>
+         </classpath>
+      </sql>
+      <echo>-------------------------------------</echo>
+      <echo>SUCCESS: create usr done</echo>
+      <echo>-------------------------------------</echo>
+   </target>
+
+   <!-- 
+   - CAT CREATE TABLE
+   -->
+   <target name="cct">
+      <exec executable="/bin/bash">
+         <arg value="cat/cat-create-entities-all.sh"/>
+      </exec>
+      <echo>-------------------------------------</echo>
+      <echo>SUCCESS: cat create table done</echo>
+      <echo>-------------------------------------</echo>
+   </target>
+
+   <!-- 
+   - CREATE TABLE
+   -->
+   <target name="ct">
+      <tstamp>
+         <format property="archive.name" 
+                 pattern="'logs/cadastro-clientes-create-entities.log'" />
+      </tstamp>
+      <sql driver="${driver.class}" 
+           url="${db.cadastro.clientes.url}" 
+           userid="${db.root.usr}" 
+           password="${db.root.psw}" 
+           src="gendb/gen-create-entities-all.sql" 
+           print="yes" 
+           output="${archive.name}">
+         <classpath>
+            <pathelement location="${driver.location}"/>
+         </classpath>
+      </sql>
+      <echo>-------------------------------------</echo>
+      <echo>SUCCESS: create table done</echo>
+      <echo>-------------------------------------</echo>
+   </target>
+
+   <!-- 
+   - CAT POPULATE TABLE
+   -->
+   <target name="cpt">
+      <exec executable="/bin/bash">
+         <arg value="cat/cat-populate-entities-all.sh"/>
+      </exec>
+      <echo>-------------------------------------</echo>
+      <echo>SUCCESS: cat populate table done</echo>
+      <echo>-------------------------------------</echo>
+   </target>
+
+   <!-- 
+   - POPULATE TABLE
+   -->
+   <target name="pt">
+      <tstamp>
+         <format property="archive.name" 
+                 pattern="'logs/cadastro-clientes-populate-entities.log'" />
+      </tstamp>
+      <sql driver="${driver.class}" 
+           url="${db.cadastro.clientes.url}" 
+           userid="${db.root.usr}" 
+           password="${db.root.psw}" 
+           src="gendb/gen-populate-entities-all.sql" 
+           print="yes" 
+           output="${archive.name}">
+         <classpath>
+            <pathelement location="${driver.location}"/>
+         </classpath>
+      </sql>
+      <echo>-------------------------------------</echo>
+      <echo>SUCCESS: populate table done</echo>
+      <echo>-------------------------------------</echo>
+   </target>
+
+   <!-- 
+   - DO ALL
+   -->
+   <target name="all" depends="cdb, cusr, cct, ct, cpt, pt"/>
+   <target name="allindocker" depends="cct, ct, cpt, pt"/>
+   
+
+</project>

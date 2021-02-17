@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+source environment
+
+
+curl -s -X GET \
+     -H "Content-Type: application/json;charset=UTF-8" \
+     -H "X-Region: BR" \
+     -H "X-Language: pt" \
+     -d @body/ClienteSearchReq.json \
+     $URL/search \
+     |jq .
+
+

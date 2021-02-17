@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export HIKARI_DS_URL="jdbc:mysql://localhost:3306/dbcadclidev"
+export HIKARI_DS_USR="dbcadclidevusr"
+export HIKARI_DS_PSW="dbcadclidevpsw"
+export HIKARI_IDLETIMEOUT="30000"
+export HIKARI_MAXIMUMPOOLSIZE="10"
+export HIKARI_DSCLASSNAME="com.mysql.cj.jdbc.MysqlDataSource"
+export HIKARI_POOLNAME="springHikariCP"
+export HIKARI_TESTQUERY="SELECT 1"
+
+cd cadastro-clientes-endpoint
+
+mvn spring-boot:run

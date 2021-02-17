@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+source environment
+
+
+curl -s -X PATCH \
+     -H "Content-Type: application/json;charset=UTF-8" \
+     -H "X-Region: BR" \
+     -H "X-Language: pt" \
+     -d @body/ClienteUpdateReq.json \
+     $URL/ \
+     |jq .
+
+

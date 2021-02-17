@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="yamlDaoProperties" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
+        <property name="resources" value="classpath:/application-dao-test.yml" />
+    </bean>
+
+    <context:property-placeholder properties-ref="yamlDaoProperties"/>
+
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="poolName" value="${hikari.config.poolname}" />
+        <property name="connectionTestQuery" value="${hikari.config.testquery}" />
+        <property name="dataSourceClassName" value="${hikari.config.dsclassname}" />
+        <property name="maximumPoolSize" value="${hikari.config.maximumpoolsize}" />
+        <property name="idleTimeout" value="${hikari.config.idletimeout}" />
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="url">${hikari.ds.url}</prop>
+                <prop key="user">${hikari.ds.usr}</prop>
+                <prop key="password">${hikari.ds.psw}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig" />
+    </bean>
+
+    <bean id="cadastroClientesDaoApi" class="io.platformbuilders.cadcli.dao.impl.CadastroClientesDaoJdbcImpl">
+        <property name="sqlClienteCreate" value="${sql.cliente.create}"/>
+        <property name="sqlClienteUpdate" value="${sql.cliente.update}"/>
+        <property name="sqlClienteFindPage" value="${sql.cliente.findpage}"/>
+        <property name="sqlClienteSearch" value="${sql.cliente.search}"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+</beans>
+

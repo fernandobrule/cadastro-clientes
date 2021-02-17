@@ -1,0 +1,56 @@
+
+hikari:
+  config:
+    idletimeout: 30000
+    maximumpoolsize: 10
+    dsclassname: com.mysql.cj.jdbc.MysqlDataSource
+    poolname: springHikariCP
+    testquery: SELECT 1
+  ds:
+    url: jdbc:mysql://localhost:3306/dbcadclidev
+    usr: dbcadclidevusr
+    psw: dbcadclidevpsw
+
+sql:
+  cliente:
+    create:
+      insert into dbcadclidev.cliente(
+        cliente_name,
+        cliente_surname,
+        cliente_age,
+        cliente_address,
+        cliente_city,
+        cliente_country,
+        cliente_mobile,
+        cliente_email)
+      values(?,?,?,?,?,?,?,?)
+    update:
+      update dbcadclidev.cliente set
+        cliente_name = ?,
+        cliente_surname = ?,
+        cliente_age = ?,
+        cliente_address = ?,
+        cliente_city = ?,
+        cliente_country = ?,
+        cliente_mobile = ?,
+        cliente_email = ?
+      where cliente_id = ?
+    findpage:
+      select
+        cliente_id,
+        cliente_name,
+        cliente_surname,
+        cliente_age,
+        cliente_address,
+        cliente_city,
+        cliente_country,
+        cliente_mobile,
+        cliente_email
+      from dbcadclidev.cliente
+      _orderBy_
+      limit ?, ?
+    search:
+      select cliente_id _select_
+      from dbcadclidev.cliente
+      _where_
+      _orderBy_

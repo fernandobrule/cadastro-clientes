@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "#### CREATE ####"
+./create
+
+echo "#### LIST ####"
+./list
+
+echo "#### SEARCH ####"
+./search
+
+echo "#### UPDATE ####"
+./update

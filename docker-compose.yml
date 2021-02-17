@@ -1,0 +1,54 @@
+version: "3.0"
+
+services:
+  
+  rediscache:
+    image: redis:alpine
+    restart: always
+    expose:
+      - 6379
+    ports:
+      - '6379:6379'
+    networks:
+      - cadclinetwork
+  
+  mysqldb:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysqlpsw
+      - MYSQL_DATABASE=dbcadclidev
+      - MYSQL_USER=dbcadclidevusr
+      - MYSQL_PASSWORD=dbcadclidevpsw
+    networks:
+      - cadclinetwork
+    expose:
+      - 3306
+    ports:
+      - '3306:3306'
+  
+  cadastroclientesapp:
+    build: .
+    networks:
+      - cadclinetwork
+    ports:
+      - '8080:8080'
+    expose:
+      - 80
+    restart: always
+    depends_on:
+      - mysqldb
+    environment:
+      - HIKARI_DS_URL=jdbc:mysql://mysqldb:3306/dbcadclidev
+      - HIKARI_DS_USR=dbcadclidevusr
+      - HIKARI_DS_PSW=dbcadclidevpsw
+      - HIKARI_IDLETIMEOUT=30000
+      - HIKARI_MAXIMUMPOOLSIZE=10
+      - HIKARI_DSCLASSNAME=com.mysql.cj.jdbc.MysqlDataSource
+      - HIKARI_POOLNAME=springHikariCP
+      - HIKARI_TESTQUERY=SELECT 1
+
+
+networks:
+  cadclinetwork:
+    driver: bridge

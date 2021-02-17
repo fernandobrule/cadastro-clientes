@@ -1,0 +1,1 @@
+java -XX:+UnlockExperimentalVMOptions -Xms128m -Xmx256m -XX:MaxMetaspaceSize=512m -XX:CompressedClassSpaceSize=64m -Xss16m -Xmn32m -XX:InitialCodeCacheSize=64m -XX:ReservedCodeCacheSize=64m -XX:MaxDirectMemorySize=128m -jar target/cadastro-clientes-endpoint.jar

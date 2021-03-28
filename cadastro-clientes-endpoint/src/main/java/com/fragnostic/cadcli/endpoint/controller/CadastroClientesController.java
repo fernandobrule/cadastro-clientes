@@ -32,11 +32,11 @@ public class CadastroClientesController {
     @ApiOperation(value = "Create a Cliente")
     @PostMapping(value = "/", produces = { "application/json" })
     public SimpleResponseJson create( //
-                                      @ApiParam(value = "[Value/Format] [Remarks] BR | CL | US", example = "BR", required = true) //
+            @ApiParam(value = "[Value/Format] [Remarks] BR | CL | US", example = "BR", required = true) //
             @RequestHeader(value = "X-Region", required = true) final String region, //
-                                      @ApiParam(value = "[Value/Format] [Remarks] pt | es | en", example = "pt", required = true) //
+            @ApiParam(value = "[Value/Format] [Remarks] pt | es | en", example = "pt", required = true) //
             @RequestHeader(value = "X-Language", required = true) final String language, //
-                                      @RequestBody ClienteCreateReq clienteCreateReq) {
+            @RequestBody ClienteCreateReq clienteCreateReq) {
 
         if (log.isInfoEnabled()) {
             log.info("create() - enter");

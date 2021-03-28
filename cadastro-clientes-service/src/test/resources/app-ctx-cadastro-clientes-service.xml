@@ -15,7 +15,7 @@
 
     <context:property-placeholder properties-ref="yamlServiceProperties"/>
 
-    <bean id="cadastroClientesServiceApi" class="io.platformbuilders.cadcli.service.impl.CadastroClientesServiceImpl">
+    <bean id="cadastroClientesServiceApi" class="com.fragnostic.cadcli.service.impl.CadastroClientesServiceImpl">
         <property name="cadastroClientesDaoApi" ref="cadastroClientesDaoApi"/>
     </bean>
 

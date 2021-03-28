@@ -4,16 +4,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.platformbuilders</groupId>
+    <groupId>com.fragnostic</groupId>
     <artifactId>cadastro-clientes</artifactId>
     <version>0.1.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>io.platformbuilders</groupId>
   <artifactId>cadastro-clientes-glue</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
   <name>Cadastro Clientes * Glue</name>
-  <url>https://platformbuilders.io/</url>
+  <url>https://github.com/fernandobrule</url>
   <description>MVP de um Cadastro de Clientes / Glue</description>
 
   <properties>

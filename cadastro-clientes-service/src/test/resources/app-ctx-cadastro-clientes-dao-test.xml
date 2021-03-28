@@ -32,7 +32,7 @@
         <constructor-arg ref="hikariConfig" />
     </bean>
 
-    <bean id="cadastroClientesDaoApi" class="io.platformbuilders.cadcli.dao.impl.CadastroClientesDaoJdbcImpl">
+    <bean id="cadastroClientesDaoApi" class="com.fragnostic.cadcli.dao.impl.CadastroClientesDaoJdbcImpl">
         <property name="sqlClienteCreate" value="${sql.cliente.create}"/>
         <property name="sqlClienteUpdate" value="${sql.cliente.update}"/>
         <property name="sqlClienteFindPage" value="${sql.cliente.findpage}"/>

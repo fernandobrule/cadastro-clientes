@@ -10,7 +10,6 @@
   </parent>
 
   <artifactId>cadastro-clientes-dao</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
   <name>Cadastro Clientes * DAO</name>
   <url>https://github.com/fernandobrule</url>
   <description>MVP de um Cadastro de Clientes / DAO</description>
@@ -74,7 +73,7 @@
     <dependency>
       <groupId>com.fragnostic</groupId>
       <artifactId>cadastro-clientes-glue</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>${project.parent.version}</version>
     </dependency>
   </dependencies>
 

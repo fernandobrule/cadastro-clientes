@@ -10,7 +10,6 @@
   </parent>
 
   <artifactId>cadastro-clientes-endpoint</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
   <name>Cadastro Clientes * Endpoint</name>
   <url>https://github.com/fernandobrule</url>
   <description>MVP de um Cadastro de Clientes / Endpoint</description>
@@ -76,7 +75,7 @@
     <dependency>
       <groupId>com.fragnostic</groupId>
       <artifactId>cadastro-clientes-service</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>${project.parent.version}</version>
     </dependency>
 
   </dependencies>

@@ -10,7 +10,6 @@
   </parent>
 
   <artifactId>cadastro-clientes-glue</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
   <name>Cadastro Clientes * Glue</name>
   <url>https://github.com/fernandobrule</url>
   <description>MVP de um Cadastro de Clientes / Glue</description>
